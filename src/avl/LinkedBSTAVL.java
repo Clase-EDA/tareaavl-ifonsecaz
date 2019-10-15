@@ -475,7 +475,7 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
         int niveles=0;
         NodoAVL<T> act=raiz;
         int conteo=0;
-        ArrayList<T> elem= new ArrayList<T>();
+        ArrayList<String> elem= new ArrayList<String>();
         
         while(act!=null){
             niveles++;
@@ -494,10 +494,10 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
         return elem.toString();
     }    
     
-    private void recorre(ArrayList<T> elem, NodoAVL<T> act, int conteo, int tope){
+    private void recorre(ArrayList<String> elem, NodoAVL<T> act, int conteo, int tope){
         if(act!=null){
             if(conteo==tope){
-                elem.add(act.getElem());
+                elem.add("Elemento: " + act.getElem() + "   Factor de equilibrio: " + act.getFe() + "\n");
             }
             else{
                 conteo++;
