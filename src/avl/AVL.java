@@ -18,30 +18,25 @@ public class AVL {
         LinkedBSTAVL a= new LinkedBSTAVL();
         
         a.add(100);
-        a.add(200);
         a.add(300);
-        a.add(10);
-        a.add(5);
-        a.add(4);
+        a.add(375);
+        a.add(200);
+        a.add(400);
+        a.add(500);
+        a.add(350);
+        a.add(380);
+        a.add(360);
         a.add(50);
-        a.add(110);
-        a.add(115);
-        a.add(37);
-        a.add(12);
-        a.add(29);
-        a.add(1000);
-        a.add(73);
-        a.add(666);
-        a.add(1);
-        a.add(82);
-        a.add(2);
-        
+        a.add(390);
+        /*
+        a.remove(375);
+        a.remove(50);
+        a.remove(400);
+        a.remove(380);
+        */
         
         System.out.println(a.imprimeIzqDerNivel());
         
-        System.out.println(a.remove(1));
-        
-        System.out.println(a.imprimeIzqDerNivel());
     }
     
 }

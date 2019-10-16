@@ -129,11 +129,12 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
                 //Fe
             if(beta.getFe()==0){
                 beta.setFe(1);
+                alfa.setFe(-1);
             }
             else{
                 beta.setFe(0);
+                alfa.setFe(0);
             }
-            alfa.setFe(0);
             
         }
         else{
@@ -249,11 +250,12 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
                     
                     if(beta.getFe()==0){
                         beta.setFe(-1);
+                        alfa.setFe(1);
                     }
                     else{
                         beta.setFe(0);
+                        alfa.setFe(0);
                     }
-                    alfa.setFe(0);
                 }
                 else{
                     //der-izq
@@ -326,10 +328,11 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
     public boolean remove(T elem) {
         boolean res=false;
         NodoAVL<T> pos=busca(raiz,elem);
-        NodoAVL<T> hijoI;
-        NodoAVL<T> hijoD;
+        NodoAVL<T> hijoI=null;
+        NodoAVL<T> hijoD=null;
         boolean f=false;
         NodoAVL<T> act=null;
+        boolean inO=false;
         
         if(pos!=null){
             res=true;
@@ -353,12 +356,14 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
             }
             else{
                 if(hijoI!=null&&hijoD!=null){
+                    inO=true;
                     while(hijoD.getIzq()!=null){
                         hijoD=hijoD.getIzq();
                     }
                     act=hijoD.getPapa();
                     if(act==pos){
                         act.setDer(null);
+                        act=hijoD;
                     }
                     else{
                         act.setIzq(null);
@@ -383,6 +388,7 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
                         hijoD.setPapa(pos.getPapa());
                         pos.getPapa().cuelga(hijoD);
                     }
+                    hijoD.setFe(pos.getFe());
                 }
                 else{
                     if(hijoI!=null){
@@ -412,14 +418,19 @@ public class LinkedBSTAVL <T extends Comparable<T>> implements BinarySearchTreeA
         
         if(act!=null){
             while(!f&&act!=null){
-                if(act.getElem().compareTo(elem)>0){
-                    act.setFe(act.getFe()+1);
-                }
-                else{
+                if(inO && act==hijoD){
                     act.setFe(act.getFe()-1);
                 }
+                else{
+                    if(act.getElem().compareTo(elem)>0){
+                        act.setFe(act.getFe()+1);
+                    }
+                    else{
+                        act.setFe(act.getFe()-1);
+                    }
+                }
                 if(Math.abs(act.getFe())>=2){
-                    rotacion(act.getPapa());
+                    rotacion(act);
                     f=true;
                 }
                 if(Math.abs(act.getFe())==1){
